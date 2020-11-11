@@ -1,6 +1,6 @@
 tensorflow-hub
 absl-py
-tensorfliow
+tensorflow
 numpy
 seaborn
 pandas
