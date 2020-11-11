@@ -1,9 +1,9 @@
 on:
   push:
 jobs:
-  run:
+  run_treebeard_action:
     runs-on: ubuntu-latest
-    name: Run treebeard
+    name: Run treebeard Action
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -14,3 +14,34 @@ jobs:
           docker-username: "alextreebeard"
           docker-password: "${{ secrets.DOCKER_PASSWORD }}"
           docker-image-name: "treebeardtech/bigthingsconference2020"  
+
+  run_treebeard_python:
+    runs-on: ubuntu-latest
+    name: Run treebeard Python
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: BSFishy/pip-action@v1
+        with:
+          packages: |
+            git+https://github.com/treebeardtech/treebeard.git@master#subdirectory=treebeard-lib
+      - run: python -c 'from treebeard import run_treebeard;run_treebeard()'
+
+
+  run_treebeard_python_dockerless:
+    runs-on: ubuntu-latest
+    name: Run treebeard Python Dockerless
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: BSFishy/pip-action@v1
+        with:
+          packages: |
+            git+https://github.com/treebeardtech/treebeard.git@master#subdirectory=treebeard-lib
+          requirements: requirements.txt
+      - run: python -c 'from treebeard import run_treebeard;run_treebeard()'
+

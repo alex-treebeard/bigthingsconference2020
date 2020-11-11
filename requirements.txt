@@ -1,6 +1,7 @@
 tensorflow-hub
 absl-py
-tensorflow
+tensorfliow
 numpy
 seaborn
 pandas
+google-cloud-storage
