@@ -28,7 +28,11 @@ jobs:
           packages: |
             git+https://github.com/treebeardtech/treebeard.git@master#subdirectory=treebeard-lib
       - run: python -c 'from treebeard import run_treebeard;assert run_treebeard(use_docker=True) == 0'
-
+        env:
+          # ideally we'd move these to the python API
+          TREEBEARD_IMAGE_NAME: "treebeardtech/bigthingsconference2020"
+          DOCKER_USERNAME: "alextreebeard"
+          DOCKER_PASSWORD: "${{ secrets.DOCKER_PASSWORD }}"
 
   run_treebeard_python_dockerless:
     runs-on: ubuntu-latest
